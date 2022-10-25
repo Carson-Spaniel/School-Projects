@@ -10,81 +10,65 @@ struct node* head = NULL;
 
 void displayList()
 {
-	struct node* nodePtr;  // To move through the list
+	struct node* nodePtr;
 
-	// Position nodePtr at the head of the list.
 	nodePtr = head;
 
-	// While nodePtr points to a node, traverse
-	// the list.
 	while (nodePtr)
 	{
-		// Display the value in this node.
 		printf("%.2f  ", nodePtr->value);
 
-		// Move to the next node.
 		nodePtr = nodePtr->next;
 	}
 }
 
-void insert_end(float num)//Appending a node
+void insert_end(float num)
 {
-	struct node* newNode;// To point to a new node
-	struct node* nodeptr;// To move through the list
+	struct node* newNode;
+	struct node* nodeptr;
 
 	newNode = (struct node*)malloc(sizeof(struct node));
 	newNode->value = num;
-	newNode->next = NULL;//This node will become the last node in the list, its next pointer must be a null pointer.
+	newNode->next = NULL;
 
-	if (head == NULL)// If there are no nodes in the list, make newNode the first node.
+	if (head == NULL)
 	{
-		head = newNode;//Making head point to the new node's location.
-		//Note: newNode pointer variable contains the address of this node’s location. But newNode->next has the address of the node it is pointing too next in the list.	
+		head = newNode;
 	}
-	else// Otherwise, insert newNode at end.
+	else
 	{
-		//The code uses nodePtr to travel down the list. It does this by first assigning nodePtr to start/head.
-		nodeptr = head;// Initialize nodePtr to "head/start" of list. Now it's at the start of the list. 
+		nodeptr = head;
 
-		// Find the last node in the list.
-		while (nodeptr->next != NULL)//While this is not nullptr
+		while (nodeptr->next != NULL)
 		{
 			nodeptr = nodeptr->next;
-		}//The last node will be the one whose next member points to nullptr.
+		}
 
-		nodeptr->next = newNode;// Insert newNode as the last node.
-		//Now the last node in the list point to the new node, instead of the nullptr.
-		//But the newNode point to the nullptr.
+		nodeptr->next = newNode;
 	}
 }
 
 void insertNode(double num)
 {
-	struct node* newNode;					// A new node
-	struct node* nodePtr;					// To traverse the list
-	struct node* previousNode = NULL;	// The previous node
+	struct node* newNode;
+	struct node* nodePtr;
+	struct node* previousNode = NULL;
 
-	// Allocate a new node and store num there.
 	newNode = (struct node*)malloc(sizeof(struct node));
 	newNode->value = num;
 
-	// If there are no nodes in the list
-	// make newNode the first node
 	if (!head)
 	{
 		head = newNode;
 		newNode->next = NULL;
 	}
-	else  // Otherwise, insert newNode
+	else
 	{
-		// Position nodePtr at the head of list.
 		nodePtr = head;
 
-		// Initialize previousNode to nullptr.
 		previousNode = NULL;
 
-		// Skip all nodes whose value is less than num.
-		while (nodePtr != NULL && nodePtr->value < num)//nodePtr != nullptr: if it's not at the very end of the list
+		while (nodePtr != NULL && nodePtr->value < num)
 		{
 			previousNode = nodePtr;
 			nodePtr = nodePtr->next;
